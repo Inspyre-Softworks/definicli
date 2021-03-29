@@ -1,0 +1,23 @@
+colorama==0.4.4; sys_platform == "win32" or platform_system == "Windows" \
+    --hash=sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2 \
+    --hash=sha256:5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b
+colorlog==4.8.0 \
+    --hash=sha256:3dd15cb27e8119a24c1a7b5c93f9f3b455855e0f73993b1c25921b2f646f1dcd \
+    --hash=sha256:59b53160c60902c405cdec28d38356e09d40686659048893e026ecbd589516b1
+inspy-logger==2.0.1b1 \
+    --hash=sha256:55c0d355ae038c558f0ee47ea19e83f29bb649dc67f577bd17e3ec2f4aa4ab6f \
+    --hash=sha256:f5d5010347e1bf6fcecf7df1083a8ff82f2042f6ab7fcbdfe999336a234a7b0e
+luddite==1.0.1 \
+    --hash=sha256:af6b66317a86e173257627a1fde0c7e6265f57a03fdf354d25e3ec8b13670c43
+packaging==20.9 \
+    --hash=sha256:67714da7f7bc052e064859c05c595155bd1ee9f69f76557e21f051443c20947a \
+    --hash=sha256:5b327ac1320dc863dca72f4514ecc086f31186744b84a230374cc1fd776feae5
+pyparsing==2.4.7 \
+    --hash=sha256:ef9d7589ef3c200abe66653d3f1ab1033c3c419ae9b9bdb1240a85b024efc88b \
+    --hash=sha256:c203ec8783bf771a155b207279b9bccb8dea02d8f0c9e5f8ead507bc3246ecc1
+pysimplegui==4.38.0 \
+    --hash=sha256:348003637178571e9e56a27f8dd2aa9d48d1dffefbbc997df1f8f30168608710 \
+    --hash=sha256:2e3f4ee99ba3fb8577d29a767ee23f76dd67ae3fefd3ba86911dfb51bd809ff2
+setuptools-autover==1.0.2 \
+    --hash=sha256:74f99ef522381beed318b77cf9cc31e87a9c63240c02165a1a2033fac0bdec84 \
+    --hash=sha256:8fc16cc5c54fa7766ddd53629d5aae1a02724078e1d3b653a9e523af53fefbe4

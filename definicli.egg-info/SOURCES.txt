@@ -1,0 +1,9 @@
+setup.py
+definicli/__init__.py
+definicli/config.py
+definicli.egg-info/PKG-INFO
+definicli.egg-info/SOURCES.txt
+definicli.egg-info/dependency_links.txt
+definicli.egg-info/requires.txt
+definicli.egg-info/top_level.txt
+definicli/gui/frames/__init__.py

@@ -1,4 +1,3 @@
-
 class ElementVisibleError(Exception):
     def __init__(self, element_name=None):
         """

@@ -1,13 +1,8 @@
 from os import makedirs
 from pathlib import Path
 from configparser import ConfigParser
-import inspy_logger
-from inspy_logger import getLogger, InspyLogger
 
-APP_DIR = Path('~/Inspyre-Softworks/definicli').expanduser().resolve()
-CONF_DIR = APP_DIR.joinpath('config/')
-CACHE_DIR = Path('~/.cache/Inspyre-Softworks/definicli').expanduser().resolve()
-
+from definicli import ISL, ISL_DEV, start_logger, ARGS, CACHE_DIR, APP_DIR
 
 class Settings(object):
     def __init__(self, app_dir=None):
@@ -20,7 +15,8 @@ class Settings(object):
             app_dir (str): Path to where you want me to place a directory to store our data in within your profile. (
             Defaults to:
         """
-        self.cache = self.Cache()
+        cache = self.Cache()
+        self.cache = cache.cache
         self.cache_fp = CACHE_DIR.joinpath('cache.ini')
         
         if app_dir is None:
@@ -31,15 +27,36 @@ class Settings(object):
     
     class Config(ConfigParser):
         def __init__(self):
-            self.conf_filepath = APP_DIR.joinpath()
+            super().__init__()
+            self.conf_filepath = ARGS.app_dir.joinpath('conf/config.ini')
+
+            self.log_name = 'config.Settings.Config'
+
+            if not ISL.in_manifest(self.log_name):
+                log = start_logger(self.log_name)
+            else:
+                log = ISL.in_manifest(self.log_name, True)
+
+            log.debug(f"{self.log_name} initialized!")
+
+            log.debug("Checking for app directory")
+
+            app_dir = Path(ARGS.app_dir).expanduser()
+
+            conf_dir = app_dir.joinpath('conf/')
+
+            if conf_dir.exists():
+                log.debug(f"Found path: {ARGS.app_dir}. Loading.")
+                self.load()
+            else:
+                log.debug(f"Could not find path {ARGS.app_dir}. Creating.")
+                makedirs(conf_dir)
+                self.create()
 
         def load(self):
-            """ 
-            
-            Load the config-file 
+            self.read(self.conf_filepath)
 
-            """
-            pass
+            return self
 
         def create(self):
             """
@@ -47,14 +64,30 @@ class Settings(object):
             Create a config file.
 
             """
-            pass
+            conf = {
+                '[DEFAULT]': {
+                    'api_key': ''
+                },
+                '[MAIN]': {
+                    'always_start_gui': False
+                }
+            }
+            self.read_dict(conf)
 
-        def check(self):
+            return self.write_config()
+
+        def write_config(self):
             """
             
             Check for an existing config file at self.conf-filepath
 
             """
+            conf_dest = self.conf_filepath
+
+            with open(conf_dest, 'w') as fp:
+                self.write(fp)
+
+            return self.load
         
     
     
@@ -149,14 +182,18 @@ class Settings(object):
             with open(self.fp, 'w') as fp:
                 self.cache.write(fp)
         
-        def __init__(self, parsed_args, reload_if_exists=False):
+        def __init__(self, reload_if_exists=False):
             
             self.log_name = 'definicli.Settings.Cache'
-            log = getLogger(self.log_name)
+
+            if not ISL.in_manifest(self.log_name):
+                log = start_logger(self.log_name)
+            else:
+                log = ISL.in_manifest(self.log_name, True)
             
             debug = log.debug
             self.fp = Path('~/.cache/Inspyre-Softworks/definicli/cache.ini').expanduser()
-            self.app_fp = parsed_args.app_dir
+            self.app_fp = ARGS.app_dir
             
             self.app_fp = Path('~/Inspyre-Softworks/definicli/config/config.ini').expanduser()
             

@@ -1,8 +1,7 @@
-import PySimpleGUI as gui
-from definicli.config import Settings
+#!/usr/bin/env python3
 
-settings = Settings()
-config = settings.Config()
+import definicli
+from definicli import CONF
 
-print(config.sections())
+
 

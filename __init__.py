@@ -3,10 +3,6 @@ from definicli.api import WordsAPI
 
 started = False
 
-class NetworkError(Exception):
-    def __init__(self):
-        self.message = "An unknown network error seems to have occurred"
-
 if not started:
 
     APP_DIR = Path('~/Inspyre-Softworks/definicli').expanduser().resolve()

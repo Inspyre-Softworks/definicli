@@ -1,6 +1,6 @@
 import requests
 
-from definicli import NetworkError
+from definicli.api.errors import NetworkError
 
 class WordsAPI(object):
     def __init__(self):

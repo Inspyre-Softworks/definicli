@@ -65,10 +65,10 @@ class Settings(object):
 
             """
             conf = {
-                '[DEFAULT]': {
+                'DEFAULT': {
                     'api_key': ''
                 },
-                '[MAIN]': {
+                'MAIN': {
                     'always_start_gui': False
                 }
             }

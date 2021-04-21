@@ -50,7 +50,14 @@ class CMDLine(ArgumentParser):
                           help="A string representing the path you'd like your application data directory to preside in.",
                           default=APP_DIR)
 
+        self.add_argument('-A', '--API-key',
+        action='store',
+        help='The key for the dictionary API',
+        required=False,
+        default=None)
 
 
 _args = CMDLine()
 ARGS = _args.parse_args()
+    
+

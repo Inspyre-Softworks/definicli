@@ -5,7 +5,8 @@
 # Author: Taylor-Jayde J. Blackstone <t.blackstone@inspyre.tech>
 # ************************ #
 from inspy_logger import InspyLogger
-from definicli import LOG_LEVEL
+
+LOG_LEVEL = 'info'
 
 
 class ISL(InspyLogger):
@@ -15,7 +16,7 @@ class ISL(InspyLogger):
         self.Device = self.LogDevice("definicli", LOG_LEVEL)
         
         if not self.Device.started:
-            self.root_logger = self.Device.start()
+            self.rt_logger = self.Device.start()
         else:
             pass
     
@@ -48,9 +49,11 @@ class ISL(InspyLogger):
 
 isl = ISL()
 ISL_DEV = isl.Device
-ROOT_LOG = isl.root_logger
+ROOT_LOG = isl.rt_logger
 ISL = isl
 
+def chg_lvl(lvl):
+    ISL_DEV.adjust_level(lvl)
 
 def start_logger(name):
     global isl

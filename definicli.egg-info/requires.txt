@@ -1,2 +1,4 @@
 PySimpleGUI<5.0.0,>=4.38.0
-inspy-logger==2.0.1b1
+bpython<0.22,>=0.21
+inspy_logger==2.1a10
+prompt-toolkit<4.0.0,>=3.0.18

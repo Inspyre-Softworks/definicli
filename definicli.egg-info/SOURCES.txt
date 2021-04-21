@@ -1,10 +1,16 @@
 setup.py
+definicli/__init__.py
 definicli.egg-info/PKG-INFO
 definicli.egg-info/SOURCES.txt
 definicli.egg-info/dependency_links.txt
 definicli.egg-info/requires.txt
 definicli.egg-info/top_level.txt
+definicli/api/__init__.py
+definicli/api/errors.py
 definicli/config/__init__.py
 definicli/gui/errors/__init__.py
 definicli/gui/frames/__init__.py
 definicli/logger/__init__.py
+definicli/tools/__init__.py
+definicli/tools/args_parse.py
+definicli/tools/prompts.py

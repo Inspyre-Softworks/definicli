@@ -1,5 +1,5 @@
+import os
 from pathlib import Path
-
 
 started = False
 
@@ -37,9 +37,19 @@ if not started:
 
     from definicli.tools.prompts import attention, get_input
 
+    ATN_PROMPT = attention
+    INPUT_PROMPT = get_input
+
     if ARGS.API_key:
         CONF['MAIN']['api_key'] = ARGS.API_key
         CONF.write_config()
+    else:
+        ROOT_LOG.debug("Checking environment for variable.")
+        try:
+            CONF['MAIN']['api_key'] = os.environ['DEFINICLI_API_KEY']
+            CONF.write_config()
+        except KeyError:
+            ROOT_LOG.debug("No environment variable named 'DEFINICLI_API_KEY'")
 
     if CONF['MAIN']['api_key'] == '':
         cont = attention("An API key is required use DefInICLI!", "API Key Needed")

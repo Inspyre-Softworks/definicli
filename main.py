@@ -2,6 +2,3 @@
 
 import definicli
 from definicli import CONF
-
-
-

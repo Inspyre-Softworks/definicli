@@ -80,6 +80,9 @@ def clean_response(word, response):
         definition = entry['definition']
         pos = entry['partOfSpeech']
 
+        if pos == 'None':
+            pos = '----'
+
         line = f"{word} | {pos} | - {definition}"
 
         lines.append(line)

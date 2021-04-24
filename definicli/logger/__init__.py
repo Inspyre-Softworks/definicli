@@ -53,7 +53,7 @@ ROOT_LOG = isl.rt_logger
 ISL = isl
 
 def chg_lvl(lvl):
-    ISL_DEV.adjust_level(lvl)
+    ISL_DEV.adjust_level(lvl, True)
 
 def start_logger(name):
     global isl

@@ -2,7 +2,8 @@ from os import makedirs
 from pathlib import Path
 from configparser import ConfigParser
 
-from definicli import ISL, ISL_DEV, start_logger, ARGS, CACHE_DIR, APP_DIR
+from definicli import ISL, start_logger, ARGS, CACHE_DIR, APP_DIR
+
 
 class Settings(object):
     def __init__(self, app_dir=None):
@@ -18,13 +19,12 @@ class Settings(object):
         cache = self.Cache()
         self.cache = cache.cache
         self.cache_fp = CACHE_DIR.joinpath('cache.ini')
-        
+
         if app_dir is None:
             self.app_dir = APP_DIR
         else:
             self.app_dir = Path(app_dir).expanduser().resolve()
-    
-    
+
     class Config(ConfigParser):
         def __init__(self):
             super().__init__()
@@ -88,11 +88,8 @@ class Settings(object):
                 self.write(fp)
 
             return self.load
-        
-    
-    
+
     class Cache(object):
-        
         class AlreadyLoadedError(Exception):
             def __init__(self):
                 """
@@ -110,8 +107,7 @@ class Settings(object):
                 msg = "The cache is already loaded. If you want to reload it from disk try .reload"
                 self.message = msg
                 self.msg = msg
-        
-        
+
         def check(self):
             """ Check to see if the cachefile exists
             
@@ -128,7 +124,7 @@ class Settings(object):
                 return True
             else:
                 return False
-        
+
         def create(self):
             """ Creates a new cache
             
@@ -138,21 +134,17 @@ class Settings(object):
             Returns:
 
             """
-            
-            _ = {
-                    'DEFAULT': {
-                            'app_dir': self.app_fp
-                            }
-                    }
+
+            _ = {'DEFAULT': {'app_dir': self.app_fp}}
             parser = ConfigParser()
             parser.read_dict(_)
             self.cache = parser
-            
+
             makedirs(self.fp)
             self.write()
-            
+
             return self.load()
-        
+
         def load(self):
             if self.cache:
                 raise Settings.Cache.AlreadyLoadedError()
@@ -160,11 +152,11 @@ class Settings(object):
                 parser = ConfigParser()
                 parser.read(self.fp)
                 self.cache = parser
-                
+
                 self.loaded = True
-                
+
                 return parser
-        
+
         def reload(self):
             """
             
@@ -175,39 +167,42 @@ class Settings(object):
 
             """
             self.cache = None
-            
+
             return self.load()
-        
+
         def write(self):
             with open(self.fp, 'w') as fp:
                 self.cache.write(fp)
-        
+
         def __init__(self, reload_if_exists=False):
-            
+
             self.log_name = 'definicli.Settings.Cache'
 
             if not ISL.in_manifest(self.log_name):
                 log = start_logger(self.log_name)
             else:
                 log = ISL.in_manifest(self.log_name, True)
-            
+
             debug = log.debug
-            self.fp = Path('~/.cache/Inspyre-Softworks/definicli/cache.ini').expanduser()
+            self.fp = Path(
+                '~/.cache/Inspyre-Softworks/definicli/cache.ini').expanduser()
             self.app_fp = ARGS.app_dir
-            
-            self.app_fp = Path('~/Inspyre-Softworks/definicli/config/config.ini').expanduser()
-            
+
+            self.app_fp = Path(
+                '~/Inspyre-Softworks/definicli/config/config.ini').expanduser(
+                )
+
             debug(f"Cache filepath: {self.fp}")
             debug(f"Default app directory: {self.app_fp}")
-            
+
             debug("Setting tracking variables")
             self.loaded = False
             debug(f"var | .loaded = False")
             self.cache = None
             debug(f"var | .cache == None")
-            
+
             debug(f'Checking for existing cachefile...')
-            
+
             try:
                 if self.check:
                     debug(f"Found a cache file at {self.fp}")
@@ -219,5 +214,7 @@ class Settings(object):
                 if reload_if_exists:
                     self.reload()
                 else:
-                    print("Try '.reload' or try to initialize the cache again with the parameter 'reload_if_exists' set as bool(True)")
+                    print(
+                        "Try '.reload' or try to initialize the cache again with the parameter 'reload_if_exists' set as bool(True)"
+                    )
                     raise

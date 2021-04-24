@@ -7,6 +7,7 @@ LOG_NAME = 'api'
 
 LOG = start_logger(LOG_NAME)
 
+
 class WordsAPI:
     def __init__(self):
         self.log_name = LOG_NAME + '.WordsAPI'
@@ -32,12 +33,12 @@ class WordsAPI:
         """
         self.headers['x-rapidapi-key'] = api_key
 
-    def get_lookup_segments(self, word:str):
+    def get_lookup_segments(self, word: str):
         res = f"{word}/definitions"
 
         return res
 
-    def get_response(self, word:str):
+    def get_response(self, word: str):
         """
         
         Lookup a given term on the WordsAPI
@@ -69,7 +70,6 @@ def lookup_word(word):
         word (str): The word to which you'd like the definition.
 
     """
-    defs = API.get_response(word)
 
     return API.get_response(word)
 
@@ -88,5 +88,3 @@ def clean_response(word, response):
         lines.append(line)
 
     return lines
-
-

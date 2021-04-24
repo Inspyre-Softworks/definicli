@@ -12,14 +12,14 @@ LOG_LEVEL = 'info'
 class ISL(InspyLogger):
     def __init__(self):
         super().__init__()
-        
+
         self.Device = self.LogDevice("definicli", LOG_LEVEL)
-        
+
         if not self.Device.started:
             self.rt_logger = self.Device.start()
         else:
             pass
-    
+
     def in_manifest(self, name, return_log_on_true=False):
         """
         
@@ -52,8 +52,10 @@ ISL_DEV = isl.Device
 ROOT_LOG = isl.rt_logger
 ISL = isl
 
+
 def chg_lvl(lvl):
     ISL_DEV.adjust_level(lvl, True)
+
 
 def start_logger(name):
     global isl
@@ -70,5 +72,5 @@ def start_logger(name):
     else:
         log = ISL_DEV.add_child(name)
         log.debug(f"Logger started for {log.name}")
-    
+
     return log

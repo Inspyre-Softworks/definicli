@@ -7,5 +7,3 @@ from definicli import CONF, ARGS, ATN_PROMPT, INPUT_PROMPT
 LOG_NAME = 'definicli'
 
 LOG = getLogger(LOG_NAME)
-
-

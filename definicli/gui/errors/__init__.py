@@ -13,5 +13,6 @@ class ElementVisibleError(Exception):
             en = 'Not Provided'
         else:
             en = element_name.upper()
-        self.msg = "The specified element is already visible! Element: {}".format(en)
+        self.msg = "The specified element is already visible! Element: {}".format(
+            en)
         self.message = self.msg

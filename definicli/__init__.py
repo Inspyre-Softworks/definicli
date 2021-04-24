@@ -20,7 +20,10 @@ if not started:
     else:
         LOG_LEVEL = ARGS.log_level
 
-    from definicli.logger import ROOT_LOG, chg_lvl
+    from definicli.logger import ROOT_LOG, chg_lvl, ISL, start_logger
+
+    ISL = ISL
+    start_logger = start_logger
 
     if not ROOT_LOG.level == LOG_LEVEL:
         chg_lvl(LOG_LEVEL)

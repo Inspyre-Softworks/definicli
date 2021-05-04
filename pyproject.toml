@@ -4,14 +4,15 @@ requires = ["poetry>=0.12"]
 
 [tool]
 [tool.poetry]
-authors = ["Your Name <you@example.com>"]
+authors = ["T. Blackstone <t.blackstone@inspyre.tech>"]
 description = ""
 name = "definicli"
-version = "1.0.0"
+version = "1.0.1"
 [tool.poetry.dependencies]
 PySimpleGUI = "^4.38.0"
 bpython = "^0.21"
 python = "^3.8"
 prompt-toolkit = "^3.0.18"
-inspy_logger = "2.1a10"
+inspy_logger = "2.1a13"
 [tool.poetry.dev-dependencies]
+poetry = "^1.1.6"
